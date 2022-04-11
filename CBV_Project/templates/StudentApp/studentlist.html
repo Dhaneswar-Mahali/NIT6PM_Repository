@@ -1,0 +1,46 @@
+{% extends 'StudentApp/base.html' %}
+
+{% block title %}
+       Student List
+{% endblock %}
+
+{% block body %}
+     {% if student_list %}
+       <table class="table table-bordered table-striped table-dark">
+          <thead>
+              <tr>
+                  <th>Id</th>
+                  <th>Sname</th>
+                  <th>Marks</th>
+                  <th>Mobile</th>
+                  <th>Email</th>
+                  <th>Address</th>
+                  <th>Action</th>
+              </tr>
+          </thead>
+       {% for stud in student_list %}
+           <tbody>
+                <tr>
+                    <td>
+                        <a href="{% url 'student_detail' stud.id %}">{{ stud.id }}</a>
+                    </td>
+                    <td>{{ stud.sname }}</td>
+                    <td>{{ stud.marks }}</td>
+                    <td>{{ stud.mobile }}</td>
+                    <td>{{ stud.email}}</td>
+                    <td>{{ stud.address}}</td>
+                    <td>
+                        <a href="{% url 'student_update' stud.id %}" class="btn btn-success btn-sm">Update</a>
+                        <a href="{% url 'student_delete' stud.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+           </tbody>
+       {% endfor%}
+       </table>
+    {% else %}
+      <h1>Student Data Not Available To Display</h1>
+    {% endif %}
+    <h1 class="text-center">
+      <a href="{% url 'student_create' %}" class="btn btn-primary btn-lg">Create New Student</a>
+    </h1>
+{% endblock %}
